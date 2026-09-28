@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<!--
+  Portfolio: Shara Marcheline.
+  Self-contained, CSS-only, print-friendly.
+-->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shara Marcheline — Portfolio | Enterprise Technology, Cloud &amp; AI · ASEAN</title>
+<meta name="description" content="Portfolio of Shara Marcheline: a trusted advisor helping ASEAN’s regulated enterprises turn cloud, data and AI into measurable adoption and revenue.">
+<meta name="author" content="Shara Marcheline">
+<meta name="color-scheme" content="light">
+<style>
+  /* ---------- Design tokens ---------- */
+  :root {
+    color-scheme: light;
+    --bg: #FAF9F5; --bg-alt: #F0EEE6; --surface: #FFFFFF; --surface-2: #FCFBF8;
+    --ink: #141413; --ink-2: #3D3C38; --muted: #6B6960;
+    --line: #E2DED3; --line-strong: #CEC8B9;
+    --accent: #C6613F; --accent-text: #A34E31; --accent-2: #D97757; --accent-soft: #F6E4DA;
+    /* Signature trust blue: text & marks, links & thin rules, tint, pill borders */
+    --blue: #1F3A5F; --blue-2: #2B5C8A; --blue-soft: #E6EDF5; --blue-line: #BCCCDE;
+    --brand-fill: #1F3A5F; --brand-on: #FAF9F5;
+    --band-bg: #14243A; --band-fg: #F0EEE6; --band-muted: #B4BFCC; --band-line: #2C3F5A; --band-accent: #E8957A; --band-link: #A8C8EA;
+    --topbar-bg: rgba(250, 249, 245, 0.88);
+    --shadow: 0 1px 2px rgba(20, 36, 58, 0.05), 0 14px 34px -22px rgba(20, 36, 58, 0.24);
+    --radius: 16px; --radius-sm: 10px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --wrap: 1180px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    --section-pad: clamp(3.5rem, 8vw, 6rem);
+  }
+  /* Viewers on a dark OS get a warm dark palette. */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #1C1B19; --bg-alt: #22211E; --surface: #292825; --surface-2: #252421;
+      --ink: #F0EEE6; --ink-2: #D6D2C6; --muted: #A9A597;
+      --line: #3A3834; --line-strong: #4D4A44;
+      --accent: #E3896A; --accent-text: #EC9A7E; --accent-2: #D97757; --accent-soft: #3A2921;
+      --blue: #A9C4E2; --blue-2: #8DB6E3; --blue-soft: #1E2B3B; --blue-line: #3A5373;
+      --brand-fill: #A9C4E2; --brand-on: #14243A;
+      --band-bg: #172A44; --band-fg: #F0EEE6; --band-muted: #B4BFCC; --band-line: #2F4562; --band-accent: #EC9A7E; --band-link: #A8C8EA;
+      --topbar-bg: rgba(28, 27, 25, 0.88);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 34px -22px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 1.0625rem; line-height: 1.6; text-align: start;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { margin: 0; font-family: var(--serif); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+  p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  p { text-wrap: pretty; }
+  strong { font-weight: 650; color: var(--ink); }
+  a { color: inherit; text-decoration-line: underline; text-decoration-color: var(--blue-2); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  a:hover { color: var(--blue-2); }
+  :focus-visible { outline: 2px solid var(--blue-2); outline-offset: 3px; border-radius: 4px; }
+  .sr { position: absolute; inline-size: 1px; block-size: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .wrap { max-inline-size: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+  section[id], footer[id] { scroll-margin-block-start: 4.25rem; }
+  .muted { color: var(--muted); }
+
+  .skip { position: absolute; inset-inline-start: 1rem; inset-block-start: -4rem; z-index: 100; padding: 0.6rem 1rem; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 0.9rem; text-decoration: none; }
+  .skip:focus { inset-block-start: 1rem; color: var(--bg); }
+
+  .bullets { display: grid; gap: 0.5rem; }
+  .bullets li { position: relative; padding-inline-start: 1.25rem; color: var(--ink-2); }
+  .bullets li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: 0.74em; inline-size: 0.6rem; block-size: 2px; border-radius: 2px; background: var(--blue-2); }
+
+  .tag { display: inline-flex; align-items: center; padding: 0.2rem 0.55rem; border-radius: 5px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.5; white-space: nowrap; }
+  .tag--ai { background: var(--accent-soft); color: var(--accent-text); }
+  .tag--home { background: var(--blue-soft); color: var(--blue); }
+  .tag--ind { padding: 0.12rem 0.5rem; border: 1px solid var(--line-strong); color: var(--ink-2); }
+  .tag--training { padding: 0.08rem 0.45rem; border: 1px solid var(--line-strong); color: var(--muted); font-size: 0.62rem; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip { display: inline-flex; align-items: baseline; gap: 0.35rem; padding: 0.26rem 0.65rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface-2); font-size: 0.84rem; line-height: 1.35; color: var(--ink-2); }
+  .chip small { font-size: 0.72rem; color: var(--muted); }
+
+  /* ---------- Top bar ---------- */
+  .topbar { position: sticky; inset-block-start: 0; z-index: 40; background: var(--bg); border-block-end: 1px solid var(--line); }
+  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .topbar { background: var(--topbar-bg); -webkit-backdrop-filter: saturate(1.3) blur(12px); backdrop-filter: saturate(1.3) blur(12px); }
+  }
+  .topbar__inner { display: flex; align-items: center; gap: 1.5rem; min-block-size: 3.5rem; }
+  .brand { display: inline-flex; align-items: center; gap: 0.65rem; flex: none; color: var(--blue); text-decoration: none; }
+  .brand:hover { color: var(--blue); }
+  .brand__mark { display: grid; place-items: center; inline-size: 2.1rem; block-size: 2.1rem; border-radius: 50%; background: var(--brand-fill); color: var(--brand-on); font-family: var(--serif); font-size: 0.82rem; letter-spacing: 0.06em; }
+  .brand__name { font-family: var(--serif); font-size: 1.08rem; }
+  .topnav { flex: 0 1 auto; min-inline-size: 0; margin-inline-start: auto; }
+  .topnav ul { display: flex; gap: 1.2rem; overflow-x: auto; scrollbar-width: none; padding-block: 0.35rem; padding-inline: 0.4rem; }
+  .topnav ul::-webkit-scrollbar { display: none; }
+  .topnav a { display: block; padding-block: 0.3rem; border-block-end: 1.5px solid transparent; font-size: 0.84rem; color: var(--ink-2); text-decoration: none; white-space: nowrap; }
+  .topnav a:hover { color: var(--ink); border-block-end-color: var(--blue-2); }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; overflow: hidden; padding-block: clamp(2.75rem, 7vw, 5.5rem) clamp(3rem, 6vw, 4.75rem); border-block-end: 1px solid var(--line); }
+  .hero::before { content: ""; position: absolute; inset-block-start: -18rem; inset-inline-end: -14rem; inline-size: 44rem; block-size: 44rem; border-radius: 50%; background: radial-gradient(closest-side, var(--blue-soft), transparent); pointer-events: none; }
+  .hero::after { content: ""; position: absolute; inset-block-end: -12rem; inset-inline-start: -12rem; inline-size: 30rem; block-size: 30rem; border-radius: 50%; background: radial-gradient(closest-side, var(--accent-soft), transparent); opacity: 0.7; pointer-events: none; }
+  .hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .pill { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.42rem 0.9rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); font-size: 0.8rem; line-height: 1.35; color: var(--ink-2); }
+  .pill__dot { flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .identity { display: flex; align-items: center; gap: 1.35rem; margin-block-start: 2.1rem; }
+  .monogram { flex: none; display: grid; place-items: center; inline-size: 5.25rem; block-size: 5.25rem; border-radius: 50%; border: 1px solid var(--blue); outline: 1px solid var(--blue-line); outline-offset: 5px; background: var(--brand-fill); color: var(--brand-on); font-family: var(--serif); font-size: 1.9rem; letter-spacing: 0.03em; }
+  .name { font-size: clamp(2.35rem, 5vw, 3.6rem); line-height: 1.02; letter-spacing: -0.02em; color: var(--blue); }
+  .brandline { display: flex; align-items: flex-start; gap: 0.6rem; margin-block-start: 0.75rem; font-size: 0.76rem; font-weight: 650; letter-spacing: 0.14em; line-height: 1.4; text-transform: uppercase; color: var(--blue); }
+  .brandline::before { content: ""; flex: none; inline-size: 1.5rem; block-size: 2px; margin-block-start: calc(0.7em - 1px); border-radius: 2px; background: var(--blue-2); }
+  .roles { margin-block-start: 0.4rem; font-size: 0.9rem; letter-spacing: 0.02em; color: var(--muted); }
+  .statement { margin-block-start: 2rem; max-inline-size: 30ch; font-family: var(--serif); font-size: clamp(1.5rem, 2.7vw, 2.1rem); line-height: 1.22; letter-spacing: -0.01em; color: var(--ink); }
+  .statement em { color: var(--accent-text); }
+  .pitch { margin-block-start: 1.2rem; max-inline-size: 60ch; font-size: 1.12rem; line-height: 1.62; color: var(--ink-2); }
+  .contacts { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-block-start: 1.8rem; }
+  .contacts a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.95rem; border: 1px solid var(--blue-line); border-radius: 999px; background: var(--surface); font-size: 0.9rem; color: var(--blue-2); text-decoration-line: none; text-underline-offset: 0.22em; }
+  .contacts a:hover, .contacts a:focus-visible { border-color: var(--blue-2); color: var(--blue); text-decoration-line: underline; text-decoration-color: currentColor; }
+  .contacts a:focus-visible { border-radius: 999px; }
+  .contacts .btn { border-color: var(--blue); background: var(--brand-fill); color: var(--brand-on); font-weight: 600; }
+  .contacts .btn:hover, .contacts .btn:focus-visible { border-color: var(--blue-2); background: var(--blue-2); color: var(--brand-on); }
+  .btn .arr { margin-inline-start: -0.2rem; }
+  .ico { flex: none; inline-size: 1rem; block-size: 1rem; color: inherit; }
+
+  .facts { padding: 1.5rem 1.6rem 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .facts__title { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .facts dl { margin-block-start: 0.9rem; }
+  .facts dl > div { padding-block: 0.7rem; border-block-start: 1px solid var(--line); }
+  .facts dl > div:first-child { padding-block-start: 0; border-block-start: 0; }
+  .facts dt { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin-block-start: 0.15rem; font-size: 0.95rem; line-height: 1.45; color: var(--ink); }
+
+  /* ---------- Sections ---------- */
+  .section { padding-block: var(--section-pad); }
+  .section--alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
+  .section__head { display: grid; gap: 0.85rem; max-inline-size: 50rem; margin-block-end: clamp(2rem, 4vw, 2.9rem); }
+  .eyebrow { display: flex; align-items: center; gap: 0.7rem; font-size: 0.76rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); }
+  .eyebrow .num { display: inline-flex; align-items: center; gap: 0.7rem; font-family: var(--serif); font-size: 0.95rem; font-weight: 400; letter-spacing: 0; font-variant-numeric: lining-nums; }
+  .eyebrow .num::after { content: ""; inline-size: 1.75rem; block-size: 1px; background: var(--blue-2); }
+  .section__title { font-size: clamp(1.85rem, 3.4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.015em; }
+  .lede { max-inline-size: 62ch; font-size: 1.1rem; line-height: 1.6; color: var(--ink-2); }
+  .sub { font-family: var(--sans); font-size: 0.76rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---------- Impact ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .kpi { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.6rem 1.45rem 1.45rem; background: var(--surface); }
+  .kpi__num { font-family: var(--serif); font-size: clamp(2.35rem, 4.2vw, 3.1rem); line-height: 1; letter-spacing: -0.02em; color: var(--accent); font-variant-numeric: lining-nums; }
+  .kpi__num .pre { margin-inline-end: 0.04em; font-size: max(0.62em, 1.5rem); vertical-align: 0.25em; }
+  .kpi__num .unit { margin-inline-start: 0.03em; font-size: max(0.6em, 1.5rem); } /* stays >= 18pt: AA large text */
+  .kpi__label { margin-block-start: 0.35rem; font-size: 0.98rem; font-weight: 600; line-height: 1.35; color: var(--ink); }
+  .kpi__src { margin-block-start: auto; padding-block-start: 0.55rem; font-size: 0.8rem; line-height: 1.4; color: var(--muted); }
+
+  .pillars-wrap { margin-block-start: clamp(2.5rem, 5vw, 3.5rem); }
+  .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.25rem); margin-block-start: 1.1rem; }
+  .pillar { padding-block-start: 1.1rem; border-block-start: 2px solid var(--blue); }
+  .pillar h4 { font-size: 1.35rem; }
+  .pillar p { margin-block-start: 0.55rem; font-size: 0.97rem; color: var(--ink-2); }
+  .pillar .measured { margin-block-start: 0.9rem; font-size: 0.84rem; color: var(--muted); }
+  .pillar .measured b { display: block; margin-block-end: 0.15rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
+
+  /* ---------- Strengths ---------- */
+  .fit__head, .fit__row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem; }
+  .fit__head { padding-block: 0.75rem; border-block: 1px solid var(--line-strong); font-size: 0.72rem; font-weight: 650; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .fit__row { padding-block: 1.45rem; border-block-end: 1px solid var(--line); }
+  .fit__need { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; padding-inline-end: 2.25rem; }
+  .fit__need::after { content: "→"; position: absolute; inset-inline-end: 0; inset-block-start: 0.25rem; font-size: 1.2rem; line-height: 1; color: var(--blue-2); }
+  .fit__need h3 { font-size: 1.24rem; line-height: 1.3; }
+  .fit__bring .bullets li { font-size: 0.98rem; }
+
+  /* ---------- Footprint ---------- */
+  .markets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .market { padding: 1.25rem 1.3rem 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .market__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .market__name { font-size: 1.4rem; }
+  .market p { margin-block-start: 0.5rem; font-size: 0.9rem; line-height: 1.5; color: var(--ink-2); }
+  .block-title { margin-block: 2.4rem 1rem; }
+  .industries { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .industry { padding: 1.3rem 1.35rem 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .industry--wide { grid-column: span 2; }
+  .industry__top { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-block-end: 0.75rem; border-block-end: 1px solid var(--line); }
+  .industry__name { font-size: 1.18rem; line-height: 1.25; }
+  .industry__count { font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums; }
+  .industry .chips { margin-block-start: 0.9rem; }
+  .gloss { margin-block-start: 0.7rem; font-size: 0.8rem; color: var(--muted); }
+  .note { margin-block-start: 1.1rem; font-size: 0.86rem; color: var(--muted); }
+
+  /* ---------- Engagements ---------- */
+  .cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .case { position: relative; display: flex; flex-direction: column; padding: 1.55rem 1.5rem 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .case::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; block-size: 3px; background: var(--line-strong); }
+  .case--ai::before { background: var(--accent-2); }
+  .case--fs::before { background: var(--blue-2); }
+  .case--growth::before { background: var(--ink); }
+  .case:hover { transform: translateY(-2px); }
+  .case__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .case__client { margin-block-start: 1.05rem; font-size: 0.76rem; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .case h3 { margin-block-start: 0.4rem; font-size: 1.3rem; line-height: 1.25; }
+  .case__body { margin-block-start: 0.7rem; font-size: 0.95rem; line-height: 1.55; color: var(--ink-2); }
+  .case__role { margin-block-start: 0.8rem; font-size: 0.86rem; line-height: 1.45; color: var(--ink-2); }
+  .case__role b { font-weight: 650; color: var(--ink); }
+  .case__why { margin-block-start: auto; padding-block-start: 1.1rem; }
+  .case__why p { padding-block-start: 0.9rem; border-block-start: 1px dashed var(--line-strong); font-size: 0.88rem; line-height: 1.5; color: var(--ink-2); }
+  .k { display: block; margin-block-end: 0.2rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
+  .also { margin-block-start: 1.6rem; padding: 1.4rem 1.5rem 1.5rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); }
+  .also__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem 2.25rem; margin-block-start: 1rem; }
+  .also__list li { font-size: 0.92rem; line-height: 1.5; color: var(--ink-2); }
+  .also__list strong { display: block; margin-block-end: 0.1rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); }
+  .also__list .r { display: block; margin-block-start: 0.2rem; font-size: 0.8rem; color: var(--muted); }
+
+  /* ---------- Career ---------- */
+  .timeline { max-inline-size: 62rem; }
+  .tl { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); column-gap: 2rem; }
+  .tl__when { padding-block-start: 0.1rem; text-align: end; font-size: 0.85rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tl__body { position: relative; padding-inline-start: 2rem; padding-block-end: 2.4rem; border-inline-start: 1px solid var(--line-strong); }
+  .tl:last-child .tl__body { padding-block-end: 0.25rem; }
+  .tl__body::before { content: ""; position: absolute; inset-inline-start: -7px; inset-block-start: 0.3rem; inline-size: 13px; block-size: 13px; border-radius: 50%; background: var(--bg-alt); border: 2px solid var(--blue-2); }
+  .tl--now .tl__body::before { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-soft); }
+  .tl__org { font-size: 0.76rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
+  .tl__role { margin-block-start: 0.25rem; font-size: 1.32rem; line-height: 1.25; }
+  .tl__where { margin-block-start: 0.2rem; font-size: 0.86rem; color: var(--muted); }
+  .tl__body .bullets { margin-block-start: 0.8rem; }
+  .tl__body .bullets li { font-size: 0.97rem; }
+  .results { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-block-start: 0.9rem; }
+  .result { padding: 0.28rem 0.7rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-text); font-size: 0.8rem; font-weight: 650; line-height: 1.4; }
+
+  /* ---------- How I work ---------- */
+  .phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .phase { position: relative; display: flex; flex-direction: column; padding: 1.7rem 1.5rem 1.45rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .phase::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; block-size: 4px; background: var(--blue-2); }
+  .phase:nth-child(2)::before { background: var(--accent-2); }
+  .phase:nth-child(3)::before { background: var(--ink); }
+  .phase__days { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .phase__range { display: block; margin-block-start: 0.3rem; font-family: var(--serif); font-size: 2.5rem; font-weight: 400; line-height: 1; letter-spacing: -0.02em; text-transform: none; color: var(--accent); font-variant-numeric: lining-nums; }
+  .phase h3 { margin-block-start: 0.85rem; font-size: 1.35rem; }
+  .phase .bullets { margin-block-start: 0.85rem; }
+  .phase .bullets li { font-size: 0.95rem; }
+  .phase__basis { margin-block-start: auto; padding-block-start: 1.1rem; }
+  .phase__basis p { padding-block-start: 0.85rem; border-block-start: 1px solid var(--line); font-size: 0.82rem; line-height: 1.45; color: var(--muted); }
+  .phase__basis b { color: var(--ink-2); font-weight: 650; }
+
+  /* ---------- What drives me ---------- */
+  .why__text { max-inline-size: 40rem; }
+  .why__text p { font-size: 1.08rem; line-height: 1.7; color: var(--ink-2); }
+  .why__text p + p { margin-block-start: 1.05rem; }
+  .why__text .lead { font-family: var(--serif); font-size: clamp(1.3rem, 2vw, 1.55rem); line-height: 1.4; color: var(--ink); }
+  .why__text .signature { margin-block-start: 1.6rem; font-family: var(--serif); font-size: 1.25rem; font-style: italic; color: var(--accent-text); }
+
+  /* ---------- Credentials ---------- */
+  .creds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .cred { padding: 1.55rem 1.5rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .cred__title { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.35rem 1rem; font-size: 1.35rem; }
+  .cred__title small { font-family: var(--sans); font-size: 0.72rem; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); white-space: nowrap; }
+  .cred__title--spaced { margin-block-start: 1.6rem; padding-block-start: 1.3rem; border-block-start: 1px solid var(--line); }
+  .awards { margin-block-start: 0.9rem; }
+  .awards li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.9rem; align-items: baseline; padding-block: 0.7rem; border-block-start: 1px solid var(--line); font-size: 0.93rem; line-height: 1.4; color: var(--ink); }
+  .awards li:first-child { border-block-start: 0; }
+  .org { display: block; margin-block-end: 0.1rem; font-size: 0.68rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .yr { font-size: 0.84rem; font-weight: 650; color: var(--accent-text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .certs { display: grid; gap: 0.9rem; margin-block-start: 0.9rem; }
+  .certs li { font-size: 0.93rem; line-height: 1.45; color: var(--ink); }
+  .certs .chips { margin-block-start: 0.45rem; }
+  .cred__sub { margin-block-start: 1.3rem; padding-block-start: 1rem; border-block-start: 1px solid var(--line); font-family: var(--sans); font-size: 0.72rem; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .training { display: grid; gap: 0.5rem; margin-block-start: 0.65rem; }
+  .training li { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.9rem; color: var(--ink-2); }
+  .edu { margin-block-start: 0.9rem; }
+  .edu__deg { display: block; font-family: var(--serif); font-size: 1.12rem; line-height: 1.35; color: var(--ink); }
+  .edu__school { display: block; margin-block-start: 0.2rem; font-size: 0.92rem; color: var(--ink-2); }
+  .skills { margin-block-start: 0.85rem; }
+
+  /* ---------- Contact ---------- */
+  .contact { padding-block: clamp(3.5rem, 8vw, 5.5rem); background: var(--band-bg); color: var(--band-fg); border-block-start: 1px solid var(--band-line); }
+  .contact .eyebrow { color: var(--band-accent); }
+  .contact .eyebrow .num { color: var(--band-link); }
+  .contact .eyebrow .num::after { background: var(--band-link); }
+  .contact :focus-visible { outline-color: var(--band-link); }
+  .contact__title { margin-block-start: 0.9rem; max-inline-size: 22ch; font-size: clamp(2rem, 4.2vw, 3.1rem); line-height: 1.1; color: var(--band-fg); }
+  .contact__sub { margin-block-start: 1rem; max-inline-size: 60ch; font-size: 1.08rem; color: var(--band-muted); }
+  .contact__links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-block-start: 2.25rem; background: var(--band-line); border: 1px solid var(--band-line); border-radius: var(--radius); overflow: hidden; }
+  .contact__links li { background: var(--band-bg); }
+  .contact__links > li > a, .contact__links .static { display: block; block-size: 100%; padding: 1.2rem 1.35rem; color: var(--band-fg); text-decoration: none; }
+  .contact__links > li > a:focus-visible { outline-offset: -4px; }
+  .contact__links .k { margin-block-end: 0.3rem; color: var(--band-muted); letter-spacing: 0.16em; }
+  .contact__links .v { display: block; font-family: var(--serif); font-size: 1.12rem; line-height: 1.3; overflow-wrap: anywhere; }
+  .contact__links a .v, .contact__links a.v { color: var(--band-link); text-decoration-line: none; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  .contact__links a.v { inline-size: fit-content; max-inline-size: 100%; padding-block: 0.12rem; }
+  .contact__links a.v + a.v { margin-block-start: 0.2rem; }
+  .contact__links a:hover .v, .contact__links a:focus-visible .v, .contact__links a.v:hover, .contact__links a.v:focus-visible { color: var(--band-fg); text-decoration-line: underline; text-decoration-color: var(--band-link); }
+  .fineprint { margin-block-start: 2rem; font-size: 0.8rem; line-height: 1.5; color: var(--band-muted); }
+
+  /* ---------- Responsive (screen only; print keeps the full layout) ---------- */
+  @media screen and (max-width: 1024px) {
+    .cases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .creds { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cred--wide { grid-column: 1 / -1; }
+  }
+  @media screen and (max-width: 900px) {
+    .hero__grid { grid-template-columns: minmax(0, 1fr); }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pillars { grid-template-columns: minmax(0, 1fr); }
+    .markets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .industries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .phases { grid-template-columns: minmax(0, 1fr); }
+    .also__list { grid-template-columns: minmax(0, 1fr); }
+    .contact__links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media screen and (max-width: 760px) {
+    .brand__name { display: none; }
+    .fit__head { display: none; }
+    .fit__row { grid-template-columns: minmax(0, 1fr); gap: 0.8rem; }
+    .fit__need { padding-inline-end: 0; }
+    .fit__need::after { display: none; }
+    .tl { grid-template-columns: minmax(0, 1fr); }
+    .tl__when { padding-block: 0 0.35rem; padding-inline-start: 2rem; border-inline-start: 1px solid var(--line-strong); text-align: start; }
+  }
+  @media screen and (max-width: 620px) {
+    .cases, .creds, .industries, .contact__links { grid-template-columns: minmax(0, 1fr); }
+    .industry--wide { grid-column: auto; }
+    .monogram { inline-size: 4rem; block-size: 4rem; font-size: 1.45rem; }
+    .identity { gap: 1.1rem; }
+    .brandline { font-size: 0.7rem; letter-spacing: 0.1em; }
+    .brandline::before { display: none; }
+    .pill { align-items: flex-start; border-radius: 14px; }
+    .pill__dot { margin-block-start: 0.35rem; }
+  }
+  @media screen and (max-width: 400px) {
+    .kpis, .markets { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .case { transition: none; }
+    .case:hover { transform: none; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    :root {
+      color-scheme: light;
+      --bg: #fff; --bg-alt: #fff; --surface: #fff; --surface-2: #fff;
+      --ink: #000; --ink-2: #1f1f1f; --muted: #555;
+      --line: #d0d0d0; --line-strong: #9a9a9a;
+      --accent: #A34E31; --accent-text: #A34E31; --accent-2: #C6613F; --accent-soft: #fff;
+      --blue: #1F3A5F; --blue-2: #2B5C8A; --blue-soft: #fff; --blue-line: #9DB0C6;
+      --brand-fill: #fff; --brand-on: #1F3A5F;
+      --band-bg: #fff; --band-fg: #000; --band-muted: #444; --band-line: #bbb; --band-accent: #A34E31; --band-link: #1F3A5F;
+      --shadow: none;
+    }
+    @page { margin: 14mm 13mm 15mm; }
+    html { font-size: 9.5pt; scroll-behavior: auto; }
+    .topbar, .skip { display: none !important; }
+    .hero { padding-block: 0 1.2rem; }
+    .hero::before, .hero::after { display: none; }
+    .section, .contact { padding-block: 1.3rem; }
+    .section--alt { border-block: 0; }
+    .section__head { margin-block-end: 1rem; break-inside: avoid; break-after: avoid; }
+    h2, h3, h4 { break-after: avoid; }
+    .fit__head { break-after: avoid; }
+    .fit__need h3 { break-after: auto; }
+    .cases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact__links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi, .pillar, .fit__row, .market, .industry, .case, .also, .tl, .phase, .cred, .facts, .contact__links, .why__text, .contact { break-inside: avoid; }
+    .case:hover { transform: none; }
+    a { text-decoration: none; }
+    .tag, .result, .chip { border: 1px solid currentColor; }
+    .kpis, .contact__links, .tl--now .tl__body::before, .case::before, .phase::before, .brandline::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .why__text p { orphans: 3; widows: 3; }
+    .why__text .signature { break-before: avoid; }
+    .contact { border-block-start: 2px solid var(--blue); }
+    .contacts .btn:hover, .contacts .btn:focus-visible { border-color: var(--blue); background: var(--brand-fill); color: var(--brand-on); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#top" aria-label="Shara Marcheline, back to top">
+      <span class="brand__mark" aria-hidden="true">SM</span>
+      <span class="brand__name">Shara Marcheline</span>
+    </a>
+    <nav class="topnav" aria-label="Sections">
+      <ul role="list">
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#strengths">Strengths</a></li>
+        <li><a href="#footprint">Footprint</a></li>
+        <li><a href="#work">Engagements</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="name">
+    <div class="wrap hero__grid">
+      <div class="hero__main">
+        <p class="pill"><span class="pill__dot" aria-hidden="true"></span><span>Portfolio · Enterprise technology, cloud &amp; AI</span></p>
+        <div class="identity">
+          <div class="monogram" aria-hidden="true">SM</div>
+          <div>
+            <h1 class="name" id="name">Shara Marcheline</h1>
+            <p class="brandline">Trusted advisor to ASEAN’s regulated enterprises</p>
+            <p class="roles">Customer Success Leader · Technology Leader · Technology Strategist</p>
+          </div>
+        </div>
+        <p class="statement">Enterprise AI &amp; cloud growth leader for ASEAN’s <em>regulated industries</em>.</p>
+        <p class="pitch">I bring new technology into Southeast Asia’s regulated enterprises (banks, telcos and government) and turn it into measurable adoption and revenue: <strong>&gt;100% Azure consumption revenue attainment</strong> at Microsoft, and <strong>three new-business wins</strong> in a single year that contributed <strong>15% of IBM Consulting Indonesia’s revenue</strong>.</p>
+        <ul class="contacts" role="list" aria-label="Contact details">
+          <li><a href="mailto:shrmarcheline@gmail.com"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>shrmarcheline@gmail.com</a></li>
+          <li><a href="tel:+6281266683519"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.8 4.6-2.3 1.5a11.5 11.5 0 0 0 6.2 6.2l1.5-2.3L20 15.8V19a2 2 0 0 1-2.1 2A17 17 0 0 1 3 6.1 2 2 0 0 1 5 4z"/></svg>+62 812 6668 3519</a></li>
+          <li><a href="tel:+6281112006280"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.8 4.6-2.3 1.5a11.5 11.5 0 0 0 6.2 6.2l1.5-2.3L20 15.8V19a2 2 0 0 1-2.1 2A17 17 0 0 1 3 6.1 2 2 0 0 1 5 4z"/></svg>+62 811 1200 6280</a></li>
+          <li><a class="btn" href="https://www.linkedin.com/in/shara-marcheline/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M8 10.5V16.5M8 7.5v.01M12 16.5v-6M12 13a2.5 2.5 0 0 1 5 0v3.5"/></svg>LinkedIn profile<span class="arr" aria-hidden="true">↗</span><span class="sr"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+
+      <aside class="facts" aria-labelledby="facts-title">
+        <h2 class="facts__title" id="facts-title">Quick facts</h2>
+        <dl>
+          <div><dt>Current role</dt><dd>Senior Customer Success Account Manager, Microsoft <span class="muted">· Dec 2022–present</span></dd></div>
+          <div><dt>Previously</dt><dd>IBM Consulting (2018–2022) · PwC (2018)</dd></div>
+          <div><dt>ASEAN markets</dt><dd>Indonesia · Thailand · Malaysia · Philippines</dd></div>
+          <div><dt>Based in</dt><dd>Jakarta, Indonesia · open to relocation</dd></div>
+          <div><dt>Languages</dt><dd>Bahasa Indonesia · English (proficient)</dd></div>
+          <div><dt>Education</dt><dd>Bachelor’s degree, Industrial Engineering, Universitas Indonesia <span class="muted">· Cum Laude</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ 01 IMPACT ============ -->
+  <section class="section section--alt" id="impact" aria-labelledby="impact-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">01</span>Impact at a glance</p>
+        <h2 class="section__title" id="impact-title">Revenue growth, adoption at scale and regional reach.</h2>
+      </header>
+
+      <ul class="kpis" role="list">
+        <li class="kpi">
+          <p class="kpi__num"><span class="sr">approximately </span><span class="pre" aria-hidden="true">~</span>200<span class="unit">%</span></p>
+          <p class="kpi__label">Unified consumption revenue</p>
+          <p class="kpi__src">Microsoft · strategic enterprise accounts</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num"><span class="sr">more than </span><span class="pre" aria-hidden="true">&gt;</span>100<span class="unit">%</span></p>
+          <p class="kpi__label">Azure consumption revenue attainment</p>
+          <p class="kpi__src">Microsoft · FY25 100% Attainment Award</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num">15<span class="unit">%</span></p>
+          <p class="kpi__label">of IBM Consulting Indonesia revenue, from 3 new-business wins in one year</p>
+          <p class="kpi__src">IBM Consulting · Managing Strategy Consultant</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num">20<span class="unit">+</span></p>
+          <p class="kpi__label">accounts across 4 ASEAN markets</p>
+          <p class="kpi__src">Red Hat OpenShift POC program · quarterly TCV target achieved</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num"><span class="sr">approximately </span><span class="pre" aria-hidden="true">~</span>10<span class="unit">k</span></p>
+          <p class="kpi__label">users adopting security &amp; business applications</p>
+          <p class="kpi__src">Microsoft · adoption across strategic accounts</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num">100<span class="unit">+</span></p>
+          <p class="kpi__label">people led across internal, client &amp; vendor teams</p>
+          <p class="kpi__src">IBM Consulting · with C-level stakeholders</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num">25</p>
+          <p class="kpi__label">named enterprise &amp; government clients</p>
+          <p class="kpi__src">across 5 industry territories</p>
+        </li>
+        <li class="kpi">
+          <p class="kpi__num">8</p>
+          <p class="kpi__label">award wins at Microsoft &amp; IBM</p>
+          <p class="kpi__src">6 distinct awards · 2019–2025</p>
+        </li>
+      </ul>
+
+      <div class="pillars-wrap">
+        <h3 class="sub">How I earn trust, and how I’m measured</h3>
+        <div class="pillars">
+          <article class="pillar">
+            <h4>Customer Success Leader</h4>
+            <p>Platform strategy, adoption and value realization, expanding and scaling large strategic enterprise accounts to &gt;100% revenue attainment.</p>
+            <p class="measured"><b>Measured on</b>Cloud consumption revenue · Adoption &amp; usage</p>
+          </article>
+          <article class="pillar">
+            <h4>Technology Leader</h4>
+            <p>Leading cross-functional, cross-organization teams of 100+ people, locally and globally, across IT strategy, transformation, application development and ITSM. Agile and waterfall.</p>
+            <p class="measured"><b>Measured on</b>NPS · P&amp;L / GP target · Delivery success</p>
+          </article>
+          <article class="pillar">
+            <h4>Technology Strategist</h4>
+            <p>Complex systems, microservices, blockchain, AI, digital transformation, hybrid cloud and ITSM, driving growth through consulting and business development.</p>
+            <p class="measured"><b>Measured on</b>Signings · NPS · Continuous engagement</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 STRENGTHS ============ -->
+  <section class="section" id="strengths" aria-labelledby="strengths-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">02</span>Strengths</p>
+        <h2 class="section__title" id="strengths-title">What I bring, and the proof behind it</h2>
+        <p class="lede">The capabilities I bring, and the evidence behind each one.</p>
+      </header>
+
+      <div class="fit__head" aria-hidden="true"><span>Capability</span><span>Evidence</span></div>
+      <ol class="fit" role="list">
+        <li class="fit__row">
+          <div class="fit__need"><h3>Revenue growth and account expansion</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li><strong>&gt;100%</strong> Azure consumption revenue attainment and <strong>~200%</strong> unified consumption revenue on Microsoft strategic accounts</li>
+            <li>Microsoft <strong>FY25 100% Attainment Award</strong></li>
+            <li><strong>3 new-business wins</strong> in one year at IBM, contributing <strong>15%</strong> of IBM Consulting Indonesia revenue</li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Trusted advisor to the C-suite</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li>New business opportunities, signings and client engagement with <strong>Bank Mandiri, BRI, BNI, BTN, Pegadaian, Dirjen KI, Indosat Ooredoo</strong> and <strong>Siam Commercial Bank</strong></li>
+            <li><strong>C-level stakeholder management</strong> on transformation programs at IBM Consulting</li>
+            <li>Builds executive sponsorship and manages relationships across large strategic enterprise clients at Microsoft</li>
+            <li><strong>Maximum NPS / client satisfaction</strong> and <strong>engagement continuity driving growth</strong> (IBM Consulting)</li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Regional go-to-market across ASEAN</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li><strong>ASEAN Market Focal</strong> for <strong>20+ accounts</strong> in <strong>4 countries</strong> (Indonesia, Thailand, Malaysia and the Philippines), alongside Lead Account Partners, executive partners and global leaders</li>
+            <li>Designed the regional program strategy and communication plans; enabled resources and skills across ASEAN</li>
+            <li>ASEAN <strong>quarterly TCV target achieved</strong> on the Red Hat OpenShift POC program</li>
+            <li>ASEAN-level recognition at both employers: <strong>Microsoft ASEAN CSU Excellence Award</strong> (2023, 2024) and <strong>IBM ASEAN Service Excellence Awards</strong> (2020, 2021)</li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Orchestrating teams and partners</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li>Orchestrates strategy across Microsoft’s <strong>Global Success &amp; Support (CSU)</strong> team, Specialists, Account Team and <strong>Partners</strong> to drive value realization across Azure, Modern Work/Microsoft 365 and Power Platform</li>
+            <li>Collaborates across corporate functions (<strong>IT, Finance, HR and Procurement</strong>) on adoption and business-process transformation</li>
+            <li>Works inside a hyperscaler today, on Microsoft Azure strategic accounts, with <strong>Microsoft Partners</strong> as part of the account strategy</li>
+            <li>Multi-cloud grounding: Google Cloud Associate Cloud Engineer and AWS Cloud Practitioner (training)</li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Turning AI, cloud and data into business value</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li>AI engagements with <strong>Telkom Indonesia</strong> (MyIndibiz B2B marketplace modernization), <strong>Telkomsel</strong> (“Veronika” humanized AI chatbot) and <strong>Dirjen KI</strong> (AI and workflow engine for patents and industrial design)</li>
+            <li>Microsoft <strong>FY26 Q1 Copilot Usage Program Winner</strong></li>
+            <li>IBM-certified <strong>Data Science Specialist</strong>, with a hands-on background as business consultant and <strong>application architect</strong></li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Regulated industries and governance</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li><strong>11 financial-services clients</strong>, including banks in Indonesia and Thailand</li>
+            <li><strong>Enterprise Cloud Governance</strong> for Bank BTN, as Banking Business SME &amp; Project Lead; <strong>Enterprise Data Platform</strong> operation &amp; managed service for BRI</li>
+            <li>IBM <strong>Banking Industry (Silver)</strong> certification</li>
+            <li>Depth in <strong>DevSecOps</strong> and <strong>IT Service Management</strong></li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Enterprise, partner and government stakeholders</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li><strong>5 industry territories</strong>: financial services, telecommunications, government, automotive &amp; manufacturing, and energy &amp; resources</li>
+            <li>Government clients <strong>Dirjen Kekayaan Intelektual</strong> and the <strong>Ministry of Finance</strong></li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Program leadership and delivery</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li>Led <strong>100+ people</strong> across internal, client and vendor teams, locally and globally</li>
+            <li><strong>Release Train Engineer across 7 squads</strong> at IBM Consulting</li>
+            <li>Led <strong>6 squads</strong> delivering a <strong>1,000+ story-point MVP</strong> within a 3-week sprint for a Ministry’s transformation initiative</li>
+            <li>Certified <strong>SAFe 5.1 Product Owner/Product Manager</strong></li>
+          </ul></div>
+        </li>
+        <li class="fit__row">
+          <div class="fit__need"><h3>Communication and cultural fluency across ASEAN</h3></div>
+          <div class="fit__bring"><ul class="bullets" role="list">
+            <li>Works in <strong>Bahasa Indonesia</strong> and <strong>English</strong></li>
+            <li><strong>In-market consulting</strong> in <strong>Indonesia and Thailand</strong> as Business Consultant &amp; Application Architect, IBM Consulting (2018–2019)</li>
+            <li>IBM-certified in <strong>Enterprise Design Thinking</strong></li>
+          </ul></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 03 FOOTPRINT ============ -->
+  <section class="section section--alt" id="footprint" aria-labelledby="footprint-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">03</span>ASEAN footprint</p>
+        <h2 class="section__title" id="footprint-title">Four ASEAN markets. Five industries. 25 named clients.</h2>
+        <p class="lede">Jakarta-based, with client work and regional programs across Indonesia, Thailand, Malaysia and the Philippines.</p>
+      </header>
+
+      <ul class="markets" role="list">
+        <li class="market">
+          <div class="market__top"><h3 class="market__name">Indonesia</h3><span class="tag tag--home">Home market</span></div>
+          <p>Jakarta-based. Microsoft strategic accounts, plus IBM Consulting programs across banking, telco, government, automotive and energy &amp; resources.</p>
+        </li>
+        <li class="market">
+          <div class="market__top"><h3 class="market__name">Thailand</h3></div>
+          <p>Krung Thai Bank (paperless retail onboarding) and Siam Commercial Bank. Consulting and application-architecture work, plus the ASEAN OpenShift program.</p>
+        </li>
+        <li class="market">
+          <div class="market__top"><h3 class="market__name">Philippines</h3></div>
+          <p>Bank of Philippines, within the ASEAN Red Hat OpenShift POC program (2019–2020).</p>
+        </li>
+        <li class="market">
+          <div class="market__top"><h3 class="market__name">Malaysia</h3></div>
+          <p>Part of the four-country ASEAN Red Hat OpenShift POC program (2019–2020).</p>
+        </li>
+      </ul>
+
+      <h3 class="sub block-title">Industry territories</h3>
+      <div class="industries">
+        <article class="industry industry--wide">
+          <div class="industry__top"><h4 class="industry__name">Financial services</h4><span class="industry__count">11</span></div>
+          <ul class="chips" role="list">
+            <li class="chip">Bank Mandiri</li>
+            <li class="chip">Bank Rakyat Indonesia</li>
+            <li class="chip">Bank BTN</li>
+            <li class="chip">Krung Thai Bank <small>Thailand</small></li>
+            <li class="chip">Siam Commercial Bank <small>Thailand</small></li>
+            <li class="chip">Pegadaian</li>
+            <li class="chip">Adira Finance</li>
+            <li class="chip">Commonwealth Bank</li>
+            <li class="chip">Toyota Astra Finance</li>
+            <li class="chip">Asuransi Astra Buana</li>
+            <li class="chip">FIF Group</li>
+          </ul>
+        </article>
+        <article class="industry">
+          <div class="industry__top"><h4 class="industry__name">Petrochemicals, energy &amp; resources</h4><span class="industry__count">7</span></div>
+          <ul class="chips" role="list">
+            <li class="chip">Semen Indonesia Group</li>
+            <li class="chip">Pertamina</li>
+            <li class="chip">Sinar Mas Mining</li>
+            <li class="chip">United Tractor</li>
+            <li class="chip">Agincourt</li>
+            <li class="chip">KPP Mining</li>
+            <li class="chip">Pamapersada Nusantara</li>
+          </ul>
+        </article>
+        <article class="industry">
+          <div class="industry__top"><h4 class="industry__name">Telecommunications</h4><span class="industry__count">3</span></div>
+          <ul class="chips" role="list">
+            <li class="chip">Indosat Ooredoo</li>
+            <li class="chip">Telekomunikasi Indonesia</li>
+            <li class="chip">Telkomsel</li>
+          </ul>
+        </article>
+        <article class="industry">
+          <div class="industry__top"><h4 class="industry__name">Government</h4><span class="industry__count">2</span></div>
+          <ul class="chips" role="list">
+            <li class="chip">Dirjen Kekayaan Intelektual</li>
+            <li class="chip">Ministry of Finance</li>
+          </ul>
+          <p class="gloss">Dirjen KI: Directorate General of Intellectual Property</p>
+        </article>
+        <article class="industry">
+          <div class="industry__top"><h4 class="industry__name">Automotive, manufacturing &amp; supply chain</h4><span class="industry__count">2</span></div>
+          <ul class="chips" role="list">
+            <li class="chip">Toyota Motor Manufacturing Indonesia (TMMIN)</li>
+            <li class="chip">Serasi Autoraya</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">Also named in my work history: BNI (IBM Consulting new business) and Bank of Philippines (ASEAN OpenShift program).</p>
+    </div>
+  </section>
+
+  <!-- ============ 04 ENGAGEMENTS ============ -->
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">04</span>Selected engagements</p>
+        <h2 class="section__title" id="work-title">Where I’ve put AI, cloud and data to work</h2>
+        <p class="lede">AI programs first, followed by the regulated-finance, new-business and regional work behind them.</p>
+      </header>
+
+      <ul class="cases" role="list">
+        <li class="case case--ai">
+          <div class="case__tags"><span class="tag tag--ai">AI</span><span class="tag tag--ind">Telecommunications</span></div>
+          <p class="case__client">Telkom Indonesia · Telkomsel</p>
+          <h3>AI for B2B commerce and B2C customer care</h3>
+          <p class="case__body">Modernizing Telkom Indonesia’s B2B marketplace, MyIndibiz, with AI, and a humanized AI chatbot, “Veronika”, for Telkomsel’s B2C segment.</p>
+          <p class="case__role"><b>Role:</b> Customer Success Account Manager (both)</p>
+          <div class="case__why"><p><span class="k">Relevance</span>Customer-facing AI at telco scale, where reliability and trust matter most.</p></div>
+        </li>
+        <li class="case case--ai">
+          <div class="case__tags"><span class="tag tag--ai">AI</span><span class="tag tag--ind">Government</span></div>
+          <p class="case__client">Dirjen Kekayaan Intelektual</p>
+          <h3>Patent &amp; industrial-design services on AI and a workflow engine</h3>
+          <p class="case__body">An integrated business for patent and industrial-design processes, built on AI and a workflow engine.</p>
+          <p class="case__role"><b>Role:</b> Project Manager</p>
+          <div class="case__why"><p><span class="k">Relevance</span>Public-sector AI, delivered with government stakeholders.</p></div>
+        </li>
+        <li class="case case--fs">
+          <div class="case__tags"><span class="tag tag--ind">Financial services</span></div>
+          <p class="case__client">Bank Mandiri</p>
+          <h3>New Digital Branch System &amp; Branch Transformation</h3>
+          <p class="case__body">Led the branch transformation across program, product and release train. Separately, project-managed Core Banking System Integration &amp; Optimization Architecture.</p>
+          <p class="case__role"><b>Role:</b> Program Manager · Product Owner · Release Train Engineer</p>
+          <div class="case__why"><p><span class="k">Relevance</span>Front-office to core-banking change inside a regulated bank.</p></div>
+        </li>
+        <li class="case case--fs">
+          <div class="case__tags"><span class="tag tag--ind">Financial services</span></div>
+          <p class="case__client">Bank BTN · BRI · Pegadaian</p>
+          <h3>Cloud governance and enterprise data platforms</h3>
+          <p class="case__body">Enterprise Cloud Governance for Bank BTN; Enterprise Data Platform operation &amp; managed service for BRI; Data Driven Enterprise for Pegadaian.</p>
+          <p class="case__role"><b>Roles:</b> Banking Business SME &amp; Project Lead (BTN) · Lead ITSM, SME &amp; Project Advisor (BRI) · Lead Business Stream (Pegadaian)</p>
+          <div class="case__why"><p><span class="k">Relevance</span>The governance and data foundations regulated buyers need before AI can scale.</p></div>
+        </li>
+        <li class="case case--growth">
+          <div class="case__tags"><span class="tag tag--ind">New business</span></div>
+          <p class="case__client">IBM Consulting Indonesia</p>
+          <h3>Three wins in one year: 15% of IBM Consulting Indonesia revenue</h3>
+          <p class="case__body">Established new business opportunities, signings and client engagement with Bank Mandiri, BRI, BNI, BTN, Pegadaian, Dirjen KI, Indosat Ooredoo and Siam Commercial Bank.</p>
+          <p class="case__role"><b>Role:</b> Managing Strategy Consultant · 2021–2022</p>
+          <div class="case__why"><p><span class="k">Relevance</span>Consultative, multi-stakeholder selling across banking, telco and government.</p></div>
+        </li>
+        <li class="case case--growth">
+          <div class="case__tags"><span class="tag tag--ind">Regional go-to-market</span></div>
+          <p class="case__client">ASEAN · Red Hat OpenShift POC Program</p>
+          <h3>20+ accounts, four countries, quarterly TCV target achieved</h3>
+          <p class="case__body">Worked with Lead Account Partners, executive partners and global leaders across Indonesia, the Philippines, Malaysia and Thailand, including Bank of Philippines, Indosat, Siam Commercial Bank and Krung Thai Bank.</p>
+          <p class="case__role"><b>Role:</b> ASEAN Market Focal &amp; Program Manager · 2019–2020</p>
+          <div class="case__why"><p><span class="k">Relevance</span>A regional go-to-market motion: strategy, communications and enablement.</p></div>
+        </li>
+      </ul>
+
+      <div class="also">
+        <h3 class="sub">Also delivered</h3>
+        <ul class="also__list" role="list">
+          <li><strong>Ministry transformation MVP</strong>Led 6 squads delivering a 1,000+ story-point MVP within a 3-week sprint for a Ministry’s transformation initiative.<span class="r">IBM Consulting · Release Train Engineer across 7 squads</span></li>
+          <li><strong>Toyota Motor Manufacturing Indonesia (TMMIN)</strong>Supply chain platform with blockchain for enterprise manufacturing business optimization.<span class="r">Business Lead</span></li>
+          <li><strong>Krung Thai Bank, Thailand</strong>Paperless retail onboarding, part of a digital transformation program.<span class="r">Business Consultant</span></li>
+          <li><strong>Sinar Mas Mining</strong>POC of notary deed and company data management.<span class="r">Project Manager</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 CAREER ============ -->
+  <section class="section section--alt" id="career" aria-labelledby="career-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">05</span>Career</p>
+        <h2 class="section__title" id="career-title">From deals strategy to strategic accounts</h2>
+        <p class="lede">Microsoft · IBM Consulting · PwC</p>
+      </header>
+
+      <ol class="timeline" role="list">
+        <li class="tl tl--now">
+          <p class="tl__when">Dec 2022 – Present</p>
+          <div class="tl__body">
+            <p class="tl__org">Microsoft</p>
+            <h3 class="tl__role">Senior Customer Success Account Manager</h3>
+            <p class="tl__where">Indonesia</p>
+            <ul class="bullets" role="list">
+              <li>Leads and orchestrates strategy across Global Success &amp; Support (CSU), Microsoft Specialists, the Account Team and Microsoft Partners to drive long-term value realization across Azure, Modern Work/Microsoft 365 and Power Platform</li>
+              <li>Builds executive sponsorship and manages relationships across large strategic enterprise clients: cloud consumption, solution adoption, support coverage model and delivery oversight</li>
+              <li>Collaborates across corporate functions (IT, Finance, HR, Procurement) on adoption and business-process transformation</li>
+            </ul>
+            <ul class="results" role="list" aria-label="Key achievements">
+              <li class="result">&gt;100% Azure consumption revenue attainment</li>
+              <li class="result">~200% unified consumption revenue</li>
+              <li class="result">~10k users adopting security &amp; business apps</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl">
+          <p class="tl__when">Sept 2021 – Dec 2022</p>
+          <div class="tl__body">
+            <p class="tl__org">IBM Consulting</p>
+            <h3 class="tl__role">Managing Strategy Consultant</h3>
+            <p class="tl__where">Indonesia</p>
+            <ul class="bullets" role="list">
+              <li>Led cross-functional teams on enterprise solutions: system integration and business-process optimization</li>
+              <li>Established new business opportunities, signings and client engagement for Bank Mandiri, BRI, BNI, BTN, Pegadaian, Dirjen KI, Indosat Ooredoo and Siam Commercial Bank</li>
+            </ul>
+            <ul class="results" role="list" aria-label="Key achievements">
+              <li class="result">3 wins in the year = 15% of IBM Consulting Indonesia revenue</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl">
+          <p class="tl__when">Mar 2020 – Sept 2021</p>
+          <div class="tl__body">
+            <p class="tl__org">IBM Consulting</p>
+            <h3 class="tl__role">Program Manager &amp; Chief of Scrum Masters</h3>
+            <p class="tl__where">Indonesia</p>
+            <ul class="bullets" role="list">
+              <li>Led major transformation and complex-system programs end to end: business case, execution strategy, change management and operations</li>
+              <li>Managed 100+ resources locally and globally (internal, client and vendor) and C-level stakeholders</li>
+              <li>Release Train Engineer across 7 squads; led 6 squads delivering a 1,000+ story-point MVP within a 3-week sprint for a Ministry’s transformation initiative</li>
+            </ul>
+            <ul class="results" role="list" aria-label="Key achievements">
+              <li class="result">Maximum NPS / client satisfaction</li>
+              <li class="result">Engagement continuity driving growth</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl">
+          <p class="tl__when">Oct 2019 – Mar 2020</p>
+          <div class="tl__body">
+            <p class="tl__org">IBM Consulting</p>
+            <h3 class="tl__role">ASEAN Market Focal &amp; Program Manager, Red Hat OpenShift POC Program</h3>
+            <p class="tl__where">Indonesia, Philippines, Malaysia &amp; Thailand</p>
+            <ul class="bullets" role="list">
+              <li>Managed 20+ accounts across 4 countries, including Bank of Philippines, Indosat, Siam Commercial Bank and Krung Thai Bank, with Lead Account Partners, executive partners and global leaders</li>
+              <li>Designed program strategies and communication plans; enabled resources and skills across ASEAN</li>
+            </ul>
+            <ul class="results" role="list" aria-label="Key achievements">
+              <li class="result">ASEAN quarterly TCV target achieved</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl">
+          <p class="tl__when">2018 – 2019</p>
+          <div class="tl__body">
+            <p class="tl__org">IBM Consulting</p>
+            <h3 class="tl__role">Business Consultant &amp; Application Architect</h3>
+            <p class="tl__where">Indonesia &amp; Thailand</p>
+            <ul class="bullets" role="list">
+              <li>Business and technology consulting; requirements (use cases, user stories); application architecture; functional and non-functional requirements</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl">
+          <p class="tl__when">2018</p>
+          <div class="tl__body">
+            <p class="tl__org">PwC</p>
+            <h3 class="tl__role">Associate, Deals Strategy</h3>
+            <p class="tl__where">Indonesia</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 06 HOW I WORK ============ -->
+  <section class="section" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">06</span>How I work</p>
+        <h2 class="section__title" id="approach-title">From first conversation to lasting value</h2>
+      </header>
+
+      <ol class="phases" role="list">
+        <li class="phase">
+          <p class="phase__days">Stage <span class="phase__range">01</span></p>
+          <h3>Earn sponsorship and build the business case</h3>
+          <ul class="bullets" role="list">
+            <li>Build executive sponsorship</li>
+            <li>Shape a clear business case and execution plan with stakeholders</li>
+          </ul>
+          <div class="phase__basis"><p><b>Draws on:</b> executive sponsorship across Microsoft’s strategic accounts; leading delivery strategy from business case to execution plan, change management and operations at IBM</p></div>
+        </li>
+        <li class="phase">
+          <p class="phase__days">Stage <span class="phase__range">02</span></p>
+          <h3>Orchestrate the right team</h3>
+          <ul class="bullets" role="list">
+            <li>Bring specialists, partners and the client’s own IT, Finance, HR and Procurement teams behind one plan</li>
+          </ul>
+          <div class="phase__basis"><p><b>Draws on:</b> orchestrating CSU, Specialists, Account Team and Partners at Microsoft; leading 100+ people across internal, client and vendor teams at IBM</p></div>
+        </li>
+        <li class="phase">
+          <p class="phase__days">Stage <span class="phase__range">03</span></p>
+          <h3>Drive adoption, prove value, then expand</h3>
+          <ul class="bullets" role="list">
+            <li>Measure adoption and value</li>
+            <li>Turn early results into long-term growth</li>
+          </ul>
+          <div class="phase__basis"><p><b>Draws on:</b> ~10k users adopting security &amp; business applications; &gt;100% Azure consumption revenue attainment; ~200% unified consumption revenue; maximum NPS and engagement continuity driving growth</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 07 WHAT DRIVES ME ============ -->
+  <section class="section section--alt" id="purpose" aria-labelledby="purpose-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">07</span>What drives me</p>
+        <h2 class="section__title" id="purpose-title">Helping ASEAN make a safe transition to AI.</h2>
+      </header>
+
+      <div class="why__text">
+        <p class="lead">I believe the world’s move to AI has to be safe, and it has to benefit everyone. I’ve seen what that looks like in practice. At Microsoft, we work on AI for inclusion, from AI for people with disabilities to partnerships with educational institutions. That work convinced me that AI, developed responsibly, can help drive human development for years to come.</p>
+        <p>ASEAN is where I want to help make that real. The region is a hub, and it is still growing fast. I’ve spent my career helping banks, telcos and government bodies adopt new technology, from Indonesia to Thailand, Malaysia and the Philippines. Now I want to help the region make a safe transition to AI-driven transformation: one that fuels economic growth and, just as importantly, gives people easier access to information and education.</p>
+        <p class="signature">Shara Marcheline</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 CREDENTIALS ============ -->
+  <section class="section" id="credentials" aria-labelledby="credentials-title">
+    <div class="wrap">
+      <header class="section__head">
+        <p class="eyebrow"><span class="num">08</span>Recognition &amp; credentials</p>
+        <h2 class="section__title" id="credentials-title">Recognized at Microsoft and IBM</h2>
+        <p class="lede">8 award wins across 6 distinct awards, plus certifications in agile delivery, design thinking, blockchain, banking and data science.</p>
+      </header>
+
+      <div class="creds">
+        <article class="cred">
+          <h3 class="cred__title">Awards <small>8 wins · 6 awards</small></h3>
+          <ul class="awards" role="list">
+            <li><span><span class="org">Microsoft</span>FY25 100% Attainment Award</span><span class="yr">2025</span></li>
+            <li><span><span class="org">Microsoft</span>FY26 Q1 Copilot Usage Program Winner</span><span class="yr">2025</span></li>
+            <li><span><span class="org">Microsoft</span>ASEAN CSU Excellence Award</span><span class="yr">2023 · 2024</span></li>
+            <li><span><span class="org">IBM</span>ASEAN Service Excellence Award</span><span class="yr">2020 · 2021</span></li>
+            <li><span><span class="org">IBM</span>Special Equity Award</span><span class="yr">2020</span></li>
+            <li><span><span class="org">IBM</span>Manager’s Choice Award: Restlessly Reinvent</span><span class="yr">2019</span></li>
+          </ul>
+        </article>
+
+        <article class="cred">
+          <h3 class="cred__title">Certifications</h3>
+          <ul class="certs" role="list">
+            <li>Certified SAFe 5.1 Product Owner/Product Manager</li>
+            <li><span class="org">IBM-certified</span>
+              <ul class="chips" role="list">
+                <li class="chip">Enterprise Agile</li>
+                <li class="chip">Enterprise Design Thinking</li>
+                <li class="chip">Blockchain Consultant</li>
+                <li class="chip">Banking Industry (Silver)</li>
+                <li class="chip">Data Science Specialist</li>
+              </ul>
+            </li>
+          </ul>
+          <h4 class="cred__sub">Training (not certifications)</h4>
+          <ul class="training" role="list">
+            <li>SAFe 5.0 Scrum Master <span class="tag tag--training">Training</span></li>
+            <li>Google Cloud Associate Cloud Engineer <span class="tag tag--training">Training</span></li>
+            <li>AWS Cloud Practitioner <span class="tag tag--training">Training</span></li>
+          </ul>
+        </article>
+
+        <article class="cred cred--wide">
+          <h3 class="cred__title">Education</h3>
+          <p class="edu"><span class="edu__deg">Bachelor’s degree, Industrial Engineering</span><span class="edu__school">Universitas Indonesia · Cum Laude</span></p>
+          <h3 class="cred__title cred__title--spaced">Skills</h3>
+          <ul class="chips skills" role="list">
+            <li class="chip">Platform Strategy &amp; Management</li>
+            <li class="chip">Program Management</li>
+            <li class="chip">Digital Transformation</li>
+            <li class="chip">Cross-functional Leadership</li>
+            <li class="chip">Stakeholder Engagement</li>
+            <li class="chip">Cloud</li>
+            <li class="chip">AI</li>
+            <li class="chip">Big Data</li>
+            <li class="chip">Blockchain</li>
+            <li class="chip">Microservices</li>
+            <li class="chip">Agile &amp; SAFe</li>
+            <li class="chip">Change Management</li>
+            <li class="chip">Data-driven Decision Making</li>
+            <li class="chip">DataOps</li>
+            <li class="chip">DevSecOps</li>
+            <li class="chip">IT Service Management</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ CONTACT ============ -->
+<footer class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="eyebrow"><span class="num">09</span>Contact</p>
+    <h2 class="contact__title" id="contact-title">Let’s talk about turning technology into lasting value.</h2>
+    <p class="contact__sub">I’d welcome a conversation about enterprise technology, cloud and AI across ASEAN.</p>
+    <ul class="contact__links" role="list">
+      <li><a href="mailto:shrmarcheline@gmail.com"><span class="k">Email</span><span class="v">shrmarcheline@gmail.com</span></a></li>
+      <li><div class="static"><span class="k">Phone</span><a class="v" href="tel:+6281266683519">+62 812 6668 3519</a><a class="v" href="tel:+6281112006280">+62 811 1200 6280</a></div></li>
+      <li><a href="https://www.linkedin.com/in/shara-marcheline/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">linkedin.com/in/shara-marcheline<span aria-hidden="true"> ↗</span></span><span class="sr"> (opens in a new tab)</span></a></li>
+      <li><div class="static"><span class="k">Location</span><span class="v">Jakarta, Indonesia · open to relocation</span></div></li>
+    </ul>
+    <p class="fineprint">Figures, clients and dates are drawn from my CV (2026); client names indicate the scope of my experience.</p>
+  </div>
+</footer>
+</body>
+</html>
